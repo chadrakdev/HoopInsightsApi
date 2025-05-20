@@ -1,3 +1,5 @@
+using HoopInsightsAPI.Clients;
+using HoopInsightsAPI.Middleware;
 using HoopInsightsAPI.Services;
 
 namespace HoopInsightsAPI;
@@ -9,6 +11,17 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddScoped<ITeamService, TeamService>();
+
+        // Make IHTTPContextAccessor available and register custom HTTP handler.
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddTransient<ApiKeyForwardingHandler>();
+
+        // Register typed HttpClient and wire up custom handler.
+        builder.Services.AddHttpClient<IBalldontlieClient, BalldontlieClient>(client =>
+        {
+            client.BaseAddress = new Uri("https://api.balldontlie.io/v1/");
+        })
+        .AddHttpMessageHandler<ApiKeyForwardingHandler>();
 
         // Add services to the container.
 
