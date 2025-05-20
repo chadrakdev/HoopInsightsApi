@@ -1,3 +1,4 @@
+using HoopInsightsAPI.Middleware;
 using HoopInsightsAPI.Services;
 
 namespace HoopInsightsAPI;
@@ -9,6 +10,9 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddScoped<ITeamService, TeamService>();
+
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddTransient<ApiKeyForwardingHandler>();
 
         // Add services to the container.
 
