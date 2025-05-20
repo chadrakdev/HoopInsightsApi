@@ -1,3 +1,5 @@
+using HoopInsightsAPI.Services;
+
 namespace HoopInsightsAPI;
 
 public class Program
@@ -5,6 +7,8 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddScoped<ITeamService, TeamService>();
 
         // Add services to the container.
 
@@ -17,7 +21,6 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
-
 
         app.MapControllers();
 
