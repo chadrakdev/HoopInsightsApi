@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoopInsightsAPI", "HoopInsightsAPI\HoopInsightsAPI.csproj", "{94670E51-87AE-4DA2-83CD-C3BB7522DA72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HoopInsightsAPI.Tests", "HoopInsightsAPI.Tests\HoopInsightsAPI.Tests.csproj", "{8AE23F82-AB41-4C90-94C1-AA50FB5B8CB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94670E51-87AE-4DA2-83CD-C3BB7522DA72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94670E51-87AE-4DA2-83CD-C3BB7522DA72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94670E51-87AE-4DA2-83CD-C3BB7522DA72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94670E51-87AE-4DA2-83CD-C3BB7522DA72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AE23F82-AB41-4C90-94C1-AA50FB5B8CB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AE23F82-AB41-4C90-94C1-AA50FB5B8CB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AE23F82-AB41-4C90-94C1-AA50FB5B8CB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AE23F82-AB41-4C90-94C1-AA50FB5B8CB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
