@@ -9,7 +9,7 @@ public class TeamService : ITeamService
     private readonly IBalldontlieClient _client;
     private readonly JsonSerializerOptions _jsonOptions;
 
-    public TeamService(IBalldontlieClient client, JsonSerializerOptions jsonOptions)
+    public TeamService(IBalldontlieClient client)
     {
         _client = client;
         _jsonOptions = new JsonSerializerOptions
