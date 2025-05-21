@@ -21,7 +21,7 @@ public class TeamService : ITeamService
     
     public async Task<IEnumerable<TeamDto>> GetTeamsAsync(string? name = null)
     {
-        var teamJson = await _client.GetTeamsJsonAsync(string.Empty);
+        var teamJson = await _client.GetTeamsJsonAsync();
 
         var teamResponse = JsonSerializer.Deserialize<TeamsResponseDto>(teamJson, _jsonOptions)
                            ?? throw new InvalidOperationException("Failed to parse response from teams endpoint.");

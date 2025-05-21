@@ -37,7 +37,7 @@ public class TeamServiceTests
        """;
         
         _clientMock
-            .Setup(client => client.GetTeamsJsonAsync("minnesota"))
+            .Setup(client => client.GetTeamsJsonAsync())
             .ReturnsAsync(jsonResponse);
 
         // Act
