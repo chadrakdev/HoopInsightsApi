@@ -34,7 +34,7 @@ public class TeamControllerTests
             .ReturnsAsync(teams);
 
         // Act
-        var result = await _controller.GetTeams("minnesota");
+        var result = await _controller.GetTeams("celtics");
 
         // Assert
         var ok = result.Should().BeOfType<OkObjectResult>().Subject;
