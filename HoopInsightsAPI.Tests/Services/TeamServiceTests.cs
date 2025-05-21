@@ -103,7 +103,7 @@ public class TeamServiceTests
              "data": [
                {
                  "id": 1,
-                 "abbreviation": "BOS",
+                 "abbreviation": "ATL",
                  "city": "Atlanta",
                  "conference": "East",
                  "division": "Southeast",
