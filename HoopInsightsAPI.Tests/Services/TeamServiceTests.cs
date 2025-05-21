@@ -51,4 +51,96 @@ public class TeamServiceTests
         team.Id.Should().Be(14, because: "the id is 14 in the JSON");
         team.Abbreviation.Should().Be("MIN", because: "the abbreviation is MIN in the JSON");
     }
+
+    [Fact]
+    public async Task GetTeamsAsync_WithPartialName_ShouldReturnOnlyMatchingTeams()
+    {
+        // Arrange
+        var jsonResponse = """
+           {
+             "data": [
+               {
+                 "id": 14,
+                 "abbreviation": "MIN",
+                 "city": "Minnesota",
+                 "conference": "West",
+                 "division": "Northwest",
+                 "full_name": "Minnesota Timberwolves",
+                 "name": "Timberwolves"
+               },
+               {
+                 "id": 2,
+                 "abbreviation": "BOS",
+                 "city": "Boston",
+                 "conference": "East",
+                 "division": "Atlantic",
+                 "full_name": "Boston Celtics",
+                 "name": "Celtics"
+               }
+             ]
+           }
+       """;
+
+        _clientMock
+            .Setup(client => client.GetTeamsJsonAsync())
+            .ReturnsAsync(jsonResponse);
+
+        // Act
+        var teams = await _teamService.GetTeamsAsync("wolves");
+
+        // Assert
+        teams.Should().ContainSingle(
+            team => team.FullName == "Minnesota Timberwolves",
+            because: "only the Timberwolves full_name contains 'wolves'");
+    }
+
+    [Fact]
+    public async Task GetTeamsAsync_WithNonexistentName_ShouldReturnEmpty()
+    {
+        // Arrange
+        var jsonResponse = """
+           {
+             "data": [
+               {
+                 "id": 1,
+                 "abbreviation": "BOS",
+                 "city": "Atlanta",
+                 "conference": "East",
+                 "division": "Southeast",
+                 "full_name": "Atlanta Hawks",
+                 "name": "Hawks"
+               },
+               {
+                 "id": 2,
+                 "abbreviation": "BOS",
+                 "city": "Boston",
+                 "conference": "East",
+                 "division": "Atlantic",
+                 "full_name": "Boston Celtics",
+                 "name": "Celtics"
+               },
+               {
+                 "id": 3,
+                 "abbreviation": "BKN",
+                 "city": "Brooklyn",
+                 "conference": "East",
+                 "division": "Atlantic",
+                 "full_name": "Brooklyn Nets",
+                 "name": "Nets"
+               }
+             ]
+           }
+       """;
+
+        _clientMock
+            .Setup(client => client.GetTeamsJsonAsync())
+            .ReturnsAsync(jsonResponse);
+        
+        // Act
+        var teams = await _teamService.GetTeamsAsync("seattle");
+
+        // Assert
+        teams.Should().BeEmpty(because: "no team names contain 'seattle'");
+        
+    }
 }
