@@ -20,7 +20,7 @@ public class ApiKeyForwardingHandler : DelegatingHandler
             if (!string.IsNullOrWhiteSpace(apiKey))
             {
                 request.Headers.Remove(ApiKeyHeaderName);
-                request.Headers.Add(ApiKeyHeaderName, apiKey);
+                request.Headers.Add("Authorization", apiKey);
             }
         }
 
