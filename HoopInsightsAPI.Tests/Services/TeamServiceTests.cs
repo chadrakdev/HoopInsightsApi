@@ -51,4 +51,46 @@ public class TeamServiceTests
         team.Id.Should().Be(14, because: "the id is 14 in the JSON");
         team.Abbreviation.Should().Be("MIN", because: "the abbreviation is MIN in the JSON");
     }
+
+    [Fact]
+    public async Task GetTeamsAsync_WithPartialName_ShouldReturnOnlyMatchingTeams()
+    {
+        // Arrange
+        var jsonResponse = """
+           {
+             "data": [
+               {
+                 "id": 14,
+                 "abbreviation": "MIN",
+                 "city": "Minnesota",
+                 "conference": "West",
+                 "division": "Northwest",
+                 "full_name": "Minnesota Timberwolves",
+                 "name": "Timberwolves"
+               },
+               {
+                 "id": 2,
+                 "abbreviation": "BOS",
+                 "city": "Boston",
+                 "conference": "East",
+                 "division": "Atlantic",
+                 "full_name": "Boston Celtics",
+                 "name": "Celtics"
+               }
+             ]
+           }
+       """;
+
+        _clientMock
+            .Setup(client => client.GetTeamsJsonAsync())
+            .ReturnsAsync(jsonResponse);
+
+        // Act
+        var teams = await _teamService.GetTeamsAsync("wolves");
+
+        // Assert
+        teams.Should().ContainSingle(
+            team => team.FullName == "Minnesota Timberwolves",
+            because: "only the Timberwolves full_name contains 'wolves'");
+    }
 }
