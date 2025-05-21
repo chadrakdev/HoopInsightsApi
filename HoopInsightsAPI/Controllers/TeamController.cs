@@ -18,6 +18,10 @@ public class TeamController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetTeams([FromQuery]string? name)
     {
-        throw new NotImplementedException();
+        var teams = await _teamService.GetTeamsAsync(name);
+
+        if (!teams.Any()) return NotFound(new { status = 404, error = "No teams found." });
+
+        return Ok(teams);
     }
 }
