@@ -10,13 +10,9 @@ public class BalldontlieClient : IBalldontlieClient
     {
         _httpClient = httpClient;
     }
-    public async Task<string> GetTeamsJsonAsync(string name = "")
+    public async Task<string> GetTeamsJsonAsync()
     {
-        var url = string.IsNullOrWhiteSpace(name)
-            ? "teams"
-            : $"teams?search={name.NormaliseForFuzzySearch()}";
-        
-        using var response = await _httpClient.GetAsync(url);
+        using var response = await _httpClient.GetAsync("teams");
         response.EnsureSuccessStatusCode();
 
         return await response.Content.ReadAsStringAsync();

@@ -1,5 +1,6 @@
 using System.Text.Json;
 using HoopInsightsAPI.Clients;
+using HoopInsightsAPI.Extensions;
 using HoopInsightsAPI.Models;
 
 namespace HoopInsightsAPI.Services;
@@ -20,11 +21,21 @@ public class TeamService : ITeamService
     
     public async Task<IEnumerable<TeamDto>> GetTeamsAsync(string? name = null)
     {
-        var teamJson = await _client.GetTeamsJsonAsync(name ?? string.Empty);
+        var teamJson = await _client.GetTeamsJsonAsync();
 
         var teamResponse = JsonSerializer.Deserialize<TeamsResponseDto>(teamJson, _jsonOptions)
                            ?? throw new InvalidOperationException("Failed to parse response from teams endpoint.");
 
-        return teamResponse.Data;
+        var teams = teamResponse.Data;
+
+        if (string.IsNullOrEmpty(name)) return teams;
+        
+        var searchToken = name.NormaliseForFuzzySearch();
+        teams = teams
+            .Where(team =>
+                team.FullName.ToLowerInvariant().Contains(searchToken) || team.Name.ToLowerInvariant().Contains(searchToken))
+            .ToList();
+
+        return teams;
     }
 }
