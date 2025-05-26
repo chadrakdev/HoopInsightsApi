@@ -1,4 +1,5 @@
 using HoopInsightsAPI.Clients;
+using HoopInsightsAPI.Models;
 using Moq;
 
 namespace HoopInsightsAPI.Tests.Services;
