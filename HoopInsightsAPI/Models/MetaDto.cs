@@ -5,11 +5,11 @@ namespace HoopInsightsAPI.Models;
 public class MetaDto
 {
     [JsonPropertyName("prev_cursor")]
-    public int PreviousPage { get; set; }
+    public int? PreviousPage { get; set; }
     
     [JsonPropertyName("next_cursor")]
-    public int NextPage { get; set; }
+    public int? NextPage { get; set; }
     
     [JsonPropertyName("per_page")]
-    public int PerPage { get; set; }
+    public int? PerPage { get; set; }
 }

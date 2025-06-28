@@ -26,13 +26,13 @@ public class PlayerDto
     public string Country { get; set; }
     
     [JsonPropertyName("draft_year")]
-    public int DraftYear { get; set; }
+    public int? DraftYear { get; set; }
     
     [JsonPropertyName("draft_round")]
-    public int DraftRound { get; set; }
+    public int? DraftRound { get; set; }
     
     [JsonPropertyName("draft_number")]
-    public int DraftNumber { get; set; }
+    public int? DraftNumber { get; set; }
     
     public TeamDto Team { get; set; }
 }
