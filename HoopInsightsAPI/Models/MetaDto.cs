@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace HoopInsightsAPI.Models;
 
-public class PlayerMetaDto
+public class MetaDto
 {
     [JsonPropertyName("prev_cursor")]
     public int PreviousPage { get; set; }
