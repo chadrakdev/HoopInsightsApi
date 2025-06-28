@@ -11,6 +11,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.AddScoped<ITeamService, TeamService>();
+        builder.Services.AddScoped<IPlayerService, PlayerService>();
 
         // Make IHTTPContextAccessor available and register custom HTTP handler.
         builder.Services.AddHttpContextAccessor();
